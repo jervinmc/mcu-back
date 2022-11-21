@@ -20,5 +20,7 @@ path('api/v1/admin/', admin.site.urls),
     path('api/v1/auth/user/', GetUserView.as_view(), name='auth_data'),
     path('api/v1/login/', Login.as_view(), name='token_refresh'),
     path('api/v1/users/', include('users.urls')),
+    path('api/v1/announcement/', include('announcement.urls')),
+    path('api/v1/events/', include('events.urls')),
     # path('api/v1/users/details/', GetUserView.as_view(), name='get_user'),
 ]
