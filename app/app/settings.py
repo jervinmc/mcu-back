@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'storages',
     'announcement',
+    'job_posting',
     'events',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
