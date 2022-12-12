@@ -41,6 +41,7 @@ class Login(generics.GenericAPIView):
             res = request.data
             items = User.objects.filter(email=res.get('email'),password=res.get('password')).count()
             if(items>0):
+               print("yes")
                items = User.objects.filter(email=res.get('email'),password=res.get('password')) 
                items = UserSerializer(items,many=True)       
                return Response(status=status.HTTP_200_OK,data=items.data)
