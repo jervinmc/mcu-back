@@ -42,6 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     birthdate=models.CharField(_('birthdate'),max_length=255,blank=True,null=True)
     barangay=models.CharField(_('barangay'),max_length=255,blank=True,null=True)
     middlename=models.CharField(_('middlename'),max_length=255,blank=True,null=True)
+    age=models.CharField(_('age'),max_length=255,blank=True,null=True)
     last_attended=models.CharField(_('last_attended'),max_length=255,blank=True,null=True)
     work_status=models.CharField(_('work_status'),max_length=255,blank=True,null=True)
     email=models.CharField(_('email'),max_length=255,unique=True,null=True)
