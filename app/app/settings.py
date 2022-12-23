@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'announcement',
     'job_posting',
     'events',
+    'report',
     'settings',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
