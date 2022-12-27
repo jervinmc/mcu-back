@@ -25,7 +25,7 @@ class AnnouncementView(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny, )
     def post(self,request):
         if(Report.objects.all().count()==0):
-            item = ReportSerializer(data={'event_views':1,'announcement_views':1})
+            item = ReportSerializer(data={'event_views':1,'announcement_views':1,'posting_views':1})
             item.is_valid(raise_exception=True)
             item.save()
             return Response()
@@ -38,10 +38,22 @@ class EventView(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny, )
     def post(self,request):
         if(Report.objects.all().count()==0):
-            item = ReportSerializer(data={'event_views':1,'announcement_views':1})
+            item = ReportSerializer(data={'event_views':1,'announcement_views':1,'posting_views':1})
             item.is_valid(raise_exception=True)
             item.save()
             return Response()
         else:
             Report.objects.all().update(event_views=F('event_views')+1)
+            return Response(status=status.HTTP_200_OK,data=[])
+
+class PostingView(generics.GenericAPIView):
+    permission_classes = (permissions.AllowAny, )
+    def post(self,request):
+        if(Report.objects.all().count()==0):
+            item = ReportSerializer(data={'event_views':1,'announcement_views':1,'posting_views':1})
+            item.is_valid(raise_exception=True)
+            item.save()
+            return Response()
+        else:
+            Report.objects.all().update(posting_views=F('posting_views')+1)
             return Response(status=status.HTTP_200_OK,data=[])

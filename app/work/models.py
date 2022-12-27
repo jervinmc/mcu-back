@@ -19,11 +19,10 @@ def nameFile(instance, filename):
     return 'uploads/{filename}'.format(filename=filename)
 
 
-class Event(models.Model):
-    content=models.CharField(_('content'),max_length=255,blank=True,null=True)
-    description=models.CharField(_('description'),max_length=255,blank=True,null=True)
-    date_created=models.DateTimeField(_('date_created'), null=False,blank=False,default=timezone.now)
-    image = models.ImageField(
-        _('image'), upload_to=nameFile, default="uploads/users_placeholder.png")
+class Work(models.Model):
+    user_id = models.IntegerField(_('user_id'),default=0.0)
+    company_name=models.CharField(_('company_name'),max_length=255,blank=True,null=True)
+    field=models.CharField(_('field'),max_length=255,blank=True,null=True)
+    date_joined=models.DateTimeField(_('date_joined'), null=False,blank=False,default=timezone.now)
     class Meta:
         ordering = ["-id"]

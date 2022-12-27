@@ -54,7 +54,7 @@ class Login(generics.GenericAPIView):
 
 
 
-def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+def id_generator(size=10, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 class VerifyUser(generics.GenericAPIView):
     def get(self,request,format=None,email=None):
@@ -69,15 +69,50 @@ class ResetPassword(generics.GenericAPIView):
         res = request.data
         password = id_generator()
         item = User.objects.filter(email=res.get('email')).first()
-        serializer = GetUserSerializer(item,data={"password":password})
+        serializer = UserSerializer(item,data={"password":password})
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        print(password)
         message = get_template('forgot_pass.html').render({"password":password})
-        msg = EmailMultiAlternatives('OTP', message,'bitbobms@gmail.com', [request.data.get('email')])
+        msg = EmailMultiAlternatives('OTP', message,'bitbobms@gmail.com', [res.get('email')])
         html_content = f'<p></p>'
         msg.content_subtype = "html"
         msg.send()
-        return Response()
+        return Response(data = serializer.data)
+
+class ResetPassword(generics.GenericAPIView):
+    permission_classes = (permissions.AllowAny, )
+    def post(self,request):
+        res = request.data
+        password = id_generator()
+        item = User.objects.filter(email=res.get('email')).first()
+        serializer = UserSerializer(item,data={"password":password})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        print(password)
+        message = get_template('forgot_pass.html').render({"password":password})
+        msg = EmailMultiAlternatives('OTP', message,'bitbobms@gmail.com', [res.get('email')])
+        html_content = f'<p></p>'
+        msg.content_subtype = "html"
+        msg.send()
+        return Response(data = serializer.data)
+
+class OTP(generics.GenericAPIView):
+    permission_classes = (permissions.AllowAny, )
+    def post(self,request):
+        res = request.data
+        # password = id_generator()
+        # item = User.objects.filter(email=res.get('email')).first()
+        # serializer = UserSerializer(item,data={"password":password})
+        # serializer.is_valid(raise_exception=True)
+        # serializer.save()
+        # print(password)
+        message = get_template('forgot_pass.html').render({"password":res.get('code')})
+        msg = EmailMultiAlternatives('OTP', message,'bitbobms@gmail.com', [res.get('email')])
+        html_content = f'<p></p>'
+        msg.content_subtype = "html"
+        msg.send()
+        return Response(data = [])
 
 class Signup(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny, )
@@ -100,5 +135,5 @@ class GetUserView(generics.GenericAPIView):
         user_serializer = GetUserSerializer(request.user)
         return Response({'user': user_serializer.data}, status=status.HTTP_200_OK)
 
-def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+def id_generator(size=10, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))

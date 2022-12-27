@@ -22,5 +22,6 @@ def nameFile(instance, filename):
 class Report(models.Model):
     announcement_views = models.IntegerField(_('announcement_views'),default=0.0)
     event_views = models.IntegerField(_('event_views'),default=0.0)
+    posting_views = models.IntegerField(_('posting_views'),default=0.0)
     class Meta:
         ordering = ["-id"]

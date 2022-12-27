@@ -40,6 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 class GetUserSerializer(serializers.ModelSerializer):
+
     full_name = serializers.ReadOnlyField()
 
     class Meta:
