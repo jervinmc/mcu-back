@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'announcement',
     'job_posting',
     'events',
+    'reset',
     'report',
     'work',
     'settings',
@@ -189,5 +190,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_SSL = True
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'bitbobms@gmail.com'
-EMAIL_HOST_PASSWORD='bawnxsrsfzliwdav'
+EMAIL_HOST_USER = 'mcuimpacts@gmail.com'
+EMAIL_HOST_PASSWORD='iaevrcrdkalhhxda'

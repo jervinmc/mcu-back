@@ -74,7 +74,7 @@ class ResetPassword(generics.GenericAPIView):
         serializer.save()
         print(password)
         message = get_template('forgot_pass.html').render({"password":password})
-        msg = EmailMultiAlternatives('OTP', message,'bitbobms@gmail.com', [res.get('email')])
+        msg = EmailMultiAlternatives('OTP', message,'mcuimpacts@gmail.com', [res.get('email')])
         html_content = f'<p></p>'
         msg.content_subtype = "html"
         msg.send()
@@ -91,7 +91,7 @@ class ResetPassword(generics.GenericAPIView):
         serializer.save()
         print(password)
         message = get_template('forgot_pass.html').render({"password":password})
-        msg = EmailMultiAlternatives('OTP', message,'bitbobms@gmail.com', [res.get('email')])
+        msg = EmailMultiAlternatives('OTP', message,'mcuimpacts@gmail.com', [res.get('email')])
         html_content = f'<p></p>'
         msg.content_subtype = "html"
         msg.send()
@@ -108,7 +108,24 @@ class OTP(generics.GenericAPIView):
         # serializer.save()
         # print(password)
         message = get_template('forgot_pass.html').render({"password":res.get('code')})
-        msg = EmailMultiAlternatives('OTP', message,'bitbobms@gmail.com', [res.get('email')])
+        msg = EmailMultiAlternatives('OTP', message,'mcuimpacts@gmail.com', [res.get('email')])
+        html_content = f'<p></p>'
+        msg.content_subtype = "html"
+        msg.send()
+        return Response(data = [])
+
+class ApprovalOTP(generics.GenericAPIView):
+    permission_classes = (permissions.AllowAny, )
+    def post(self,request):
+        res = request.data
+        # password = id_generator()
+        # item = User.objects.filter(email=res.get('email')).first()
+        # serializer = UserSerializer(item,data={"password":password})
+        # serializer.is_valid(raise_exception=True)
+        # serializer.save()
+        # print(password)
+        message = get_template('approval.html').render({"password":res.get('code')})
+        msg = EmailMultiAlternatives('OTP', message,'mcuimpacts@gmail.com', [res.get('email')])
         html_content = f'<p></p>'
         msg.content_subtype = "html"
         msg.send()
