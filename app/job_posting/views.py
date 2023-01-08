@@ -33,7 +33,8 @@ class NotifyGmail(generics.GenericAPIView):
             emailList.append(x['email'])
             print(x['email'])
         message = get_template('new_post.html').render({"password":""})
-        msg = EmailMultiAlternatives('OTP', message,'mcuimpacts@gmail.com', emailList)
+        User.objects.all().update(notification_announcement=F('notification_announcement')+1,notification_events=F('notification_events')+1,notification_job=F('notification_job')+1)
+        msg = EmailMultiAlternatives('Notification', message,'mcuimpacts@gmail.com', emailList)
         html_content = f'<p></p>'
         msg.content_subtype = "html"
         msg.send()

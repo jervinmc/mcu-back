@@ -47,6 +47,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     work_status=models.CharField(_('work_status'),max_length=255,blank=True,null=True)
     email=models.CharField(_('email'),max_length=255,unique=True,null=True)
     is_active=models.BooleanField(_('is_active'),default=True)
+    notification_announcement = models.IntegerField(_('notification_announcement'),default=0.0)
+    notification_job = models.IntegerField(_('notification_announcement'),default=0.0)
+    notification_event = models.IntegerField(_('notification_event'),default=0.0)
+    no_people = models.IntegerField(_('no_people'),default=0.0)
     account_type=models.CharField(_('account_type'),max_length=255,blank=True,default="Client")
     image = models.ImageField(
         _('image'), upload_to=nameFile, default="uploads/users_placeholder.png")
