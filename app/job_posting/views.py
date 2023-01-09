@@ -9,6 +9,7 @@ from email.mime.text import MIMEText
 from django.core.mail import EmailMultiAlternatives
 from rest_framework.response import Response
 from rest_framework import status, viewsets
+from django.db.models import F
 from users.models import User
 from users.serializers import GetUserSerializer
 import pusher
@@ -26,14 +27,22 @@ class JobPostingView(viewsets.ModelViewSet):
 class NotifyGmail(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny, )
     def post(self,request):
+        res = request.data
         item = User.objects.all()
         item = GetUserSerializer(item,many=True)
         emailList = []
+        print(res.get('category'))
         for x in item.data:
             emailList.append(x['email'])
             print(x['email'])
         message = get_template('new_post.html').render({"password":""})
-        User.objects.all().update(notification_announcement=F('notification_announcement')+1,notification_events=F('notification_events')+1,notification_job=F('notification_job')+1)
+        if(res.get('category')=='announcement'):
+            User.objects.all().update(notification_announcement=F('notification_announcement')+1)
+        elif(res.get('category')=='events'):
+            print('yesssss')
+            User.objects.all().update(notification_event=F('notification_event')+1)
+        elif(res.get('category')=='job'):
+            User.objects.all().update(notification_job=F('notification_job')+1)
         msg = EmailMultiAlternatives('Notification', message,'mcuimpacts@gmail.com', emailList)
         html_content = f'<p></p>'
         msg.content_subtype = "html"
