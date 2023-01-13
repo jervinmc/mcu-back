@@ -21,7 +21,7 @@ def nameFile(instance, filename):
 
 class Request(models.Model):
     firstname=models.CharField(_('firstname'),max_length=255,blank=True,null=True)
-    firstname=models.CharField(_('firstname'),max_length=255,blank=True,null=True)
+    lastname=models.CharField(_('lastname'),max_length=255,blank=True,null=True)
     date_created=models.DateTimeField(_('date_created'), null=False,blank=False,default=timezone.now)
     # image = models.ImageField(
     #     _('image'), upload_to=nameFile, default="uploads/users_placeholder.png")
