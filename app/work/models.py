@@ -23,6 +23,7 @@ class Work(models.Model):
     user_id = models.IntegerField(_('user_id'),default=0.0)
     company_name=models.CharField(_('company_name'),max_length=255,blank=True,null=True)
     position=models.CharField(_('position'),max_length=255,blank=True,null=True)
+    award_received=models.CharField(_('award_received'),max_length=255,blank=True,null=True)
     field=models.CharField(_('field'),max_length=255,blank=True,null=True)
     date_joined=models.DateTimeField(_('date_joined'), null=False,blank=False,default=timezone.now)
     class Meta:
