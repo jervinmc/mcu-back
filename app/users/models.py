@@ -45,6 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     age=models.CharField(_('age'),max_length=255,blank=True,null=True)
     last_attended=models.CharField(_('last_attended'),max_length=255,blank=True,null=True)
     work_status=models.CharField(_('work_status'),max_length=255,blank=True,null=True)
+    country_code=models.CharField(_('country_code'),max_length=255,blank=True,null=True)
     email=models.CharField(_('email'),max_length=255,unique=True,null=True)
     is_active=models.BooleanField(_('is_active'),default=True)
     notification_announcement = models.IntegerField(_('notification_announcement'),default=0.0)
