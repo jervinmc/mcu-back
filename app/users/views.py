@@ -83,6 +83,7 @@ class ResetPassword(generics.GenericAPIView):
 class ResetPassword(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny, )
     def post(self,request):
+        print('okayyy')
         res = request.data
         password = id_generator()
         item = User.objects.filter(email=res.get('email')).first()
@@ -130,6 +131,22 @@ class ApprovalOTP(generics.GenericAPIView):
         msg.content_subtype = "html"
         msg.send()
         return Response(data = [])
+
+
+class ValidateUserAccount(generics.GenericAPIView):
+    permission_classes = (permissions.AllowAny, )
+    def post(self, request, *args, **kwargs):
+        res = request.data
+        email = res.get('email')
+        try:
+            instance = User.objects.get(email=email)
+            serializer_response = UserSerializer(instance)
+            account_type = serializer_response.data.get('account_type')
+            if account_type != 'Student':
+                return Response({'message': 'User account type is not alumni.'}, status=200)
+        except Exception as err:
+            return Response({'message': 'User account type is not alumni.'}, status=200)
+        return Response({'message': 'User account type is alumni.'}, status=200)
 
 class Signup(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny, )
