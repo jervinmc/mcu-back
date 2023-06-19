@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
         
         model=User
         # fields="__all__"
-        exclude = ['last_login',
+        exclude = [
                    'is_staff', 'user_permissions']
     
     def validate_password(self, value):

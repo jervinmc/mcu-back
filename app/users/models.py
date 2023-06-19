@@ -29,6 +29,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(
         _('date_joined'), default=timezone.now)
     updated_at = models.DateTimeField(_("Updated at"), auto_now=True,blank=True)
+    last_login = models.DateTimeField(_("last_login"), default=timezone.now)
     firstname=models.CharField(_('firstname'),max_length=255,blank=True,null=True)
     gender=models.CharField(_('gender'),max_length=255,blank=True,null=True)
     student_number=models.CharField(_('student_number'),max_length=255,blank=True,null=True)
