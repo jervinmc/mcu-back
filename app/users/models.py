@@ -52,6 +52,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     country_code=models.CharField(_('country_code'),max_length=255,blank=True,null=True)
     email=models.CharField(_('email'),max_length=255,unique=True,null=True)
     is_active=models.BooleanField(_('is_active'),default=True)
+    is_locked=models.BooleanField(_('is_locked'),default=True)
     notification_announcement = models.IntegerField(_('notification_announcement'),default=0.0)
     notification_job = models.IntegerField(_('notification_announcement'),default=0.0)
     notification_event = models.IntegerField(_('notification_event'),default=0.0)
