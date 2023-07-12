@@ -114,6 +114,24 @@ class OTP(generics.GenericAPIView):
         msg.content_subtype = "html"
         msg.send()
         return Response(data = [])
+    
+
+class OTP(generics.GenericAPIView):
+    permission_classes = (permissions.AllowAny, )
+    def post(self,request):
+        res = request.data
+        # password = id_generator()
+        # item = User.objects.filter(email=res.get('email')).first()
+        # serializer = UserSerializer(item,data={"password":password})
+        # serializer.is_valid(raise_exception=True)
+        # serializer.save()
+        # print(password)
+        message = get_template('forgot_pass.html').render({"password":res.get('code')})
+        msg = EmailMultiAlternatives('OTP', message,'mcuimpacts@gmail.com', [res.get('email')])
+        html_content = f'<p></p>'
+        msg.content_subtype = "html"
+        msg.send()
+        return Response(data = [])
 
 class ApprovalOTP(generics.GenericAPIView):
     permission_classes = (permissions.AllowAny, )

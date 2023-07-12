@@ -9,7 +9,7 @@ from rest_framework import permissions
 from work.views import WorkByUser
 from job_posting.views import NotifyGmail
 from skills.views import SkillGetByID
-from report.views import EventView,AnnouncementView,PostingView
+# from report.views import EventView,AnnouncementView,PostingView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -28,11 +28,11 @@ path('api/v1/admin/', admin.site.urls),
     path('api/v1/otp/', OTP.as_view(), name='token_refresh'),
     path('api/v1/notify/', NotifyGmail.as_view(), name='token_refresh'),
     path('api/v1/validate-user/', ValidateUserAccount.as_view(), name='token_refresh'),
-    path('api/v1/event-view/', EventView.as_view(), name='token_refresh'),
+    # path('api/v1/event-view/', EventView.as_view(), name='token_refresh'),
     path('api/v1/skill-get-by-id/', SkillGetByID.as_view(), name='token_refresh'),
     path('api/v1/work-user/', WorkByUser.as_view(), name='token_refresh'),
-    path('api/v1/announcement-view/', AnnouncementView.as_view(), name='token_refresh'),
-    path('api/v1/posting-view/', PostingView.as_view(), name='token_refresh'),
+    # path('api/v1/announcement-view/', AnnouncementView.as_view(), name='token_refresh'),
+    # path('api/v1/posting-view/', PostingView.as_view(), name='token_refresh'),
     path('api/v1/users/', include('users.urls')),
     path('api/v1/announcement/', include('announcement.urls')),
     path('api/v1/events/', include('events.urls')),
